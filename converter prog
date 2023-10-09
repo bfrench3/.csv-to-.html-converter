@@ -1,0 +1,184 @@
+import java.util.*;
+import java.io.*; 
+
+public class converter {
+    public static void main(String[] args) {
+            String filein_base = "input/wolf_creek_hourly_2019_";
+
+            String filein_suffix = ".csv";
+            //input files
+            String fileout_base = "2019_";
+            String fileout_suffix = ".html";
+            //piecewise chunks of output files
+            for(int i = 1;i<=12;i++){
+                String val = (i<10) ? "0" + i : i +"";
+
+                //total file in and out references to names including the counter
+                //for which doc were importing/exporting
+                String fileIn = filein_base + val + filein_suffix;
+                String fileOut = fileout_base + val + fileout_suffix;
+                 
+                try{
+                    
+                    // /Users/bofrench/Desktop/Fall311/cosc231/src/PackageLab3French_/output
+                    File fileO = new File(fileOut);
+                    File fileI = new File(fileIn);
+                
+                    
+                   PrintWriter fOut = new PrintWriter(fileO.getName());
+                //bufferedwriter object to output to new file
+                    Scanner in = new Scanner(fileI);
+                //scanner to scan input for what we want
+
+                //html obligations
+                    fOut.write("<!doctype html>\n");
+                    fOut.write("<html><head>");
+                    
+                    
+                    fOut.write("<title>Gage Readings for 2019-"+val+": </title> \n");
+                    fOut.write("<link rel=stylesheet href = CSS/wolfcreek.css> <!-- reference to external stylesheet -->\n"); // link correctly to css sheet
+                    fOut.write("<style> * {\n" + //
+                            "\tmargin: 0 auto;\n" + //
+                            "\tpadding: 0px;\n" + //
+                            "} body {\n" + //
+                                    "\tmargin: 0 auto;\n" + //
+                                    "\toverflow: scroll;\n" + //
+                                    "\tbackground-color: #F4F4F4;\n" + //
+                                    "}hr {\n" + //
+                                            "\twidth: 80vw;\n" + //
+                                            "\tmargin-top: 20px;\n" + //
+                                            "\tmargin-bottom: 20px;\n" + //
+                                            "}\n" + //
+                                            "\n" + //
+                                            "button{\n" + //
+                                            "\tmargin-top: 20px;\n" + //
+                                            "\tmargin-bottom: 20px;\n" + //
+                                            "}\n" + //
+                                            "\n" + //
+                                            "table{\n" + //
+                                            "\tmin-width: 80%;\n" + //
+                                            "\tborder-collapse: collapse;\n" + //
+                                            "\tborder: 1px solid black;\n" + //
+                                            "}\n" + //
+                                            "\n" + //
+                                            " th{\n" + //
+                                            "\tpadding-top: 10px;\n" + //
+                                            "\tpadding-bottom: 10px;\n" + //
+                                            "\tpadding-left: 20px;\n" + //
+                                            "\tpadding-right: 20px;\n" + //
+                                            "\ttext-align: left;\n" + //
+                                            "\tbackground-color: #989A98;\n" + //
+                                            "\tborder: 1px solid black;\n" + //
+                                            "}\n" + //
+                                            "td, tr {\n" + //
+                                            "\tpadding-top: 5px;\n" + //
+                                            "\tpadding-bottom: 5px;\n" + //
+                                            "\tpadding-left: 20px;\n" + //
+                                            "\tpadding-right: 20px;\n" + //
+                                            "\ttext-align: right;\n" + //
+                                            "\tborder: 1px solid #989A98;\n" + //
+                                            "} \n" + //
+                                            ".major_format{\n" + //
+                                            "\tmargin-left: 10vw;\n" + //
+                                            "}\n" + //
+                                            "\n" + //
+                                            "h1{\n" + //
+                                            "\tmargin-bottom: 50px;\n" + //
+                                            "}\n" + //
+                                            "#navmenu_div{\n" + //
+                                            "\tbackground-color: #989A98;\n" + //
+                                            "\tborder-style: 1px solid black;\n" + //
+                                            "\topacity: 0.9;\n" + //
+                                            "}\n" + //
+                                            "\n" + //
+                                            "#nav_button{\n" + //
+                                            "\tmargin: 2px;\n" + //
+                                            "\tbackground-color: #A07574;\n" + //
+                                            "\tborder-style: 1px solid black;\n" + //
+                                            "\tpadding: 10px;\n" + //
+                                            "\tcolor: white;\n" + //
+                                            "}</style> \n <script></script> \n");
+                    fOut.write("</head>");
+                    fOut.write("<body>");
+                    fOut.write("<div id = \"top>\" \n ");
+                    fOut.write("<div id=\"navmenu_div\" class=\"navbarouter\"> \n");
+                    fOut.write("<button id=\"nav_button\">Hide Menu</button> <!-- button for hiding menu-->  \n ");
+                    fOut.write("<div id=\"navbar\" class=\"navbar\"> \n");
+                    fOut.write("<div class=\"nav_list\"><p>Maps &amp; Charts:</p></div> \n");
+                    fOut.write("<div class=\"nav_list\"> \n ");	
+                    fOut.write("<a href=\"index.html\">Main</a> <!-- link to index page --> \n");
+                    fOut.write("</div>");	
+                    fOut.write("<div class=\"nav_list\"><p>Hourly Readings by Month:</p></div>\n ");
+                    fOut.write("<div class=\"nav_list\"> \n <!-- link for all 12 monthly html pages --> "+
+                            "<a href=\"2019_01.html \">2019-01 </a> \n"+
+                            "<a href=\"2019_02.html \">2019-02 </a> \n"+
+                           " <a href=\"2019_03.html \">2019-03 </a> \n"+
+                            "<a href=\"2019_04.html \">2019-04 </a> \n"+
+                            "<a href=\"2019_05.html \">2019-05 </a> \n"+
+                            "<a href=\"2019_06.html \">2019-06 </a> \n"+
+                        "</div>"+
+                        "<div class=\"nav_list\">"+
+                            "<a href=\"2019_07.html \">2019-07 </a>\n"+
+                            "<a href=\"2019_08.html \">2019-08 </a> \n"+
+                            "<a href=\"2019_09.html \">2019-09 </a> \n"+
+                            "<a href=\"2019_10.html \">2019-10 </a> \n"+
+                            "<a href=\"2019_11.html \">2019-11 </a> \n"+
+                            "<a href=\"2019_12.html \">2019-12 </a> \n"+
+                        "</div> <!-- END	<div id=\"nav_list\"> --> \n "+
+                    "</div> <!-- END of <div id=\"navbar\" class=\"navbar\"> --> \n"+
+                "</div> <!-- END <div id=\"navmenu_div\"> -->\"\")");
+                fOut.write("<h1 class = \"major format\">Hourly observations"+
+                " for 2019-"+val+"<br>(Wolf Creek Dam, Russell, KY, USA)</h1> <!-- val is for unique iteration of page were on --> \n");
+                    fOut.write("<hr>");
+                    fOut.write("<div class=\"major_format\">\n" + //
+                            "<p>Update Elevation Highlight Threshold:</p>\n" + //
+                            "<input id=\"newdanger\" type=\"number\" >\n" + //
+                            "<p>Upstream Elevation readings across all 12 pages of hourly readings are highlighted if at or above this threshold value.</p>\n" + //
+                            "<p>Value should update threshold in some charts on the charts page too.</p>\n" + //
+                            "<p>Permitted values: [650, ]</p>\n" + //
+                            "<button id=\"btn_reset_danger\">Reset</button> (Reset Threshold to 720&apos;)\n" + //
+                            "</div> \n ");
+                    fOut.write("<table> \n \t <thead> \n \t <tr> \n \t\t <th>GAGE TIME<br>UTC (ISO-8601):</th><th>ELEVATION<br>UPSTREAM:</th><th>ELEVATION<br>DOWNSTREAM:</th><th>DISCHARGE"+
+                        "<br>HOURLY AVG:</th></tr></thead> <!-- titles for each column of table --> \n");
+                    fOut.write("<hr>");
+                    fOut.write("<button class = \"major_format\" id = \"showhide_button_\""+val+"> Hide Table </button> <!-- button for hiding table -->");
+                    fOut.write("<h2> Gage Readings for 2019_"+val+": </h2> \n");
+                    while(in.hasNext()){ //while there are more elements of input
+                        String line = in.nextLine();
+                        String[] str = line.split(","); //splits string into array
+                //seperated by commas because all the data is 
+                        fOut.write("\t \t <tr> \n"); //table row
+                        for(int k = 0;k<str.length;k++){
+
+                //prints out everything except the quotation marks
+                            String result = str[k].substring(1, str[k].length()-1);
+                            fOut.write(" \t \t \t <td>"+ result + "</td> \n ");
+                //output as table data and loop
+                }
+                    //fOut.write();
+                        fOut.write("</tr> \n");
+                }
+                //ending html ovligations
+                    fOut.write("</table> </div>"); 
+                    fOut.write("<div class = \"major format\"><a href = \"#top\"><button type=\"button\">\"Go To Top\"</button> <!-- button to go back up to top --> \n");
+                    fOut.write("<hr>");
+                    fOut.write("<div id = \"copyright\" class = \"major format\"> <!-- copyright tag line--> \n ");
+                    fOut.write("<p>&copy; 2023 - Bo French</p>");
+                    fOut.write("</body> </html>");
+               //close streams to empty the buffers
+                    in.close();
+                    fOut.close();
+             
+               //catch exception
+            }catch(FileNotFoundException f){
+                f.printStackTrace();
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+
+
+    }
+}
