@@ -3,7 +3,7 @@ import java.io.*;
 
 public class converter {
     public static void main(String[] args) {
-            String filein_base = "input/wolf_creek_hourly_2019_";
+            String filein_base = "input/wolf_creek_hourly_2019_"; //example input file names (1-12)
 
             String filein_suffix = ".csv";
             //input files
@@ -11,7 +11,7 @@ public class converter {
             String fileout_suffix = ".html";
             //piecewise chunks of output files
             for(int i = 1;i<=12;i++){
-                String val = (i<10) ? "0" + i : i +"";
+                String val = (i<10) ? "0" + i : i +""; //changes between a 0 in front or not depending on the num. (i.e. 09 or 12)
 
                 //total file in and out references to names including the counter
                 //for which doc were importing/exporting
@@ -20,7 +20,7 @@ public class converter {
                  
                 try{
                     
-                    // /Users/bofrench/Desktop/Fall311/cosc231/src/PackageLab3French_/output
+                    
                     File fileO = new File(fileOut);
                     File fileI = new File(fileIn);
                 
@@ -36,68 +36,8 @@ public class converter {
                     
                     
                     fOut.write("<title>Gage Readings for 2019-"+val+": </title> \n");
-                    fOut.write("<link rel=stylesheet href = CSS/wolfcreek.css> <!-- reference to external stylesheet -->\n"); // link correctly to css sheet
-                    fOut.write("<style> * {\n" + //
-                            "\tmargin: 0 auto;\n" + //
-                            "\tpadding: 0px;\n" + //
-                            "} body {\n" + //
-                                    "\tmargin: 0 auto;\n" + //
-                                    "\toverflow: scroll;\n" + //
-                                    "\tbackground-color: #F4F4F4;\n" + //
-                                    "}hr {\n" + //
-                                            "\twidth: 80vw;\n" + //
-                                            "\tmargin-top: 20px;\n" + //
-                                            "\tmargin-bottom: 20px;\n" + //
-                                            "}\n" + //
-                                            "\n" + //
-                                            "button{\n" + //
-                                            "\tmargin-top: 20px;\n" + //
-                                            "\tmargin-bottom: 20px;\n" + //
-                                            "}\n" + //
-                                            "\n" + //
-                                            "table{\n" + //
-                                            "\tmin-width: 80%;\n" + //
-                                            "\tborder-collapse: collapse;\n" + //
-                                            "\tborder: 1px solid black;\n" + //
-                                            "}\n" + //
-                                            "\n" + //
-                                            " th{\n" + //
-                                            "\tpadding-top: 10px;\n" + //
-                                            "\tpadding-bottom: 10px;\n" + //
-                                            "\tpadding-left: 20px;\n" + //
-                                            "\tpadding-right: 20px;\n" + //
-                                            "\ttext-align: left;\n" + //
-                                            "\tbackground-color: #989A98;\n" + //
-                                            "\tborder: 1px solid black;\n" + //
-                                            "}\n" + //
-                                            "td, tr {\n" + //
-                                            "\tpadding-top: 5px;\n" + //
-                                            "\tpadding-bottom: 5px;\n" + //
-                                            "\tpadding-left: 20px;\n" + //
-                                            "\tpadding-right: 20px;\n" + //
-                                            "\ttext-align: right;\n" + //
-                                            "\tborder: 1px solid #989A98;\n" + //
-                                            "} \n" + //
-                                            ".major_format{\n" + //
-                                            "\tmargin-left: 10vw;\n" + //
-                                            "}\n" + //
-                                            "\n" + //
-                                            "h1{\n" + //
-                                            "\tmargin-bottom: 50px;\n" + //
-                                            "}\n" + //
-                                            "#navmenu_div{\n" + //
-                                            "\tbackground-color: #989A98;\n" + //
-                                            "\tborder-style: 1px solid black;\n" + //
-                                            "\topacity: 0.9;\n" + //
-                                            "}\n" + //
-                                            "\n" + //
-                                            "#nav_button{\n" + //
-                                            "\tmargin: 2px;\n" + //
-                                            "\tbackground-color: #A07574;\n" + //
-                                            "\tborder-style: 1px solid black;\n" + //
-                                            "\tpadding: 10px;\n" + //
-                                            "\tcolor: white;\n" + //
-                                            "}</style> \n <script></script> \n");
+                    fOut.write("<link rel=stylesheet href = CSS/wolfcreek.css> <!-- reference to external stylesheet -->\n"); 
+                    fOut.write("<script></script> \n"); //empty script elm for the moment
                     fOut.write("</head>");
                     fOut.write("<body>");
                     fOut.write("<div id = \"top>\" \n ");
@@ -158,7 +98,7 @@ public class converter {
                     //fOut.write();
                         fOut.write("</tr> \n");
                 }
-                //ending html ovligations
+                //ending html obligations
                     fOut.write("</table> </div>"); 
                     fOut.write("<div class = \"major format\"><a href = \"#top\"><button type=\"button\">\"Go To Top\"</button> <!-- button to go back up to top --> \n");
                     fOut.write("<hr>");
@@ -175,6 +115,9 @@ public class converter {
                 }
                 catch(IOException e)
                 {
+                    e.printStackTrace();
+                }
+                catch(Exception e){
                     e.printStackTrace();
                 }
             }
